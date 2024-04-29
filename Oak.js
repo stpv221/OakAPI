@@ -3,11 +3,12 @@
 * Docs coming soon!
 */
 const OakAPI = {
-    version: 1.1,
+    version: 1.2,
     versionName: "infdev",
     displayVersion: function () {
         ModAPI.drawStringWithShadow({msg: "OakAPI " + OakAPI.version, x: 1, y: 27, color: -1});
     },
+    detectNewVersion: function() { },
     alert: function (opts) {
         // {title: string, subtext: string, timeMod: int} maybe add an icon later.
         var alertContainer = document.createElement("div");
@@ -49,11 +50,37 @@ const OakAPI = {
         return [alertContainer, alertTitle, alertText, alertTimeout];
     },
     newGUI: function(opts) { },
-    sendKeybind: function (opts) { },
-    playSoundClient: function (opts) { },
-    playSoundExternal: function (opts) { },
+    sendKeybind: function (opts) {
+        // {type: String, send: Integer} I habe no idea where to find these in the client.
+        if (opts.type === "forward") {
+            ModAPI.mcinstance.$gameSettings.$keyBindForward.$pressed = opts.send;
+        }
+        if (opts.type === "left") {
+            ModAPI.mcinstance.$gameSettings.$keyBindLeft.$pressed = opts.send;
+        }
+        if (opts.type === "back") {
+            ModAPI.mcinstance.$gameSettings.$keyBindBack.$pressed = opts.send;
+        }
+        if (opts.type === "right") {
+            ModAPI.mcinstance.$gameSettings.$keyBindRight.$pressed = opts.send;
+        }
+        if (opts.type === "inventory") {
+            ModAPI.mcinstance.$gameSettings.$keyBindInventory.$pressed = opts.send;
+        }
+    },
+    playSoundPlayer: function (opts) {
+        //reqires player
+        ModAPI.player.playSound({name: opts.name, volume: opts.volume, pitch: opts.pitch})
+    },
+    playSoundExternal: function (opts) {
+        // {src: string}
+        var sound = new Audio(opts.src);
+
+        sound.addEventListener("canplaythrough", (event) => {
+            sound.play();
+        })
+    },
     lwglKeys: {},
-    screen: {},
 };
 
 // document.addEventListener("click", () => {
