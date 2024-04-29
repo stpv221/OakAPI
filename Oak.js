@@ -3,14 +3,17 @@
 * Docs coming soon!
 */
 const OakAPI = {
-    version: 1.2,
+    version: 1.0,
     displayVersion: function () {
         ModAPI.drawStringWithShadow({msg: "OakAPI " + OakAPI.version, x: 1, y: 27, color: -1});
     },
-    detectNewVersion: function() {
+    detectNewVersion: async function() {
+      const responce = await fetch("https://raw.githubusercontent.com/stpv221/OakAPI/main/util/version.json")
+      const version = await responce.json();
+      OakAPI.alert({title: JSON, subtext: version, time: 100});
     },
     alert: function (opts) {
-        // {title: string, subtext: string, timeMod: int} maybe add an icon later.
+        // {title: string, subtext: string, time: Integer} maybe add an icon later.
         var alertContainer = document.createElement("div");
         alertContainer.class = "alertBox"
         alertContainer.style = "position: fixed; top: 1rem; left: 1rem; border: 0.2rem solid; border-color: black; padding: 10px; background-color: rgb(60, 60, 60); font-family: Minecraftia, sans-serif; min-width: 100px;";
@@ -36,7 +39,7 @@ const OakAPI = {
 
         var alertTimeout = function (){
             var currTime = new Date().getTime();
-            var newWidth = (100 - ((currTime - startTime)/1000) * opts.timeMod);
+            var newWidth = (100 - ((currTime - startTime)/1000) * opts.time);
             timeout.style.width = newWidth + "%";
 
             if (newWidth >= 0) {
