@@ -14,6 +14,19 @@
         iframe.src = "https://classroom.google.com";
         iframe.style = "width: 100%; height: 100%; position: absolute; top: 0; left: 0;";
 
+        ModAPI.addEventListener("key", (ev) => {
+            //backslash
+            if (ev.key == 43){
+                iframe.remove();
+            }
+        })
+
         document.body.appendChild(iframe);
     }
+    ModAPI.addEventListener("key", (ev) => {
+        //backslash
+        if (ev.key == 43){
+            openGC();
+        }
+    })
 })
