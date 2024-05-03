@@ -24,8 +24,8 @@
         document.body.appendChild(iframe);
     }
     ModAPI.addEventListener("key", (ev) => {
-        //backslash
-        if (ev.key == 43){
+        //l
+        if (ev.key == 39){
             openGC();
         }
     })
