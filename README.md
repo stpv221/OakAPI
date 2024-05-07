@@ -1,4 +1,5 @@
 # OakAPI
+alot of stuff now not needed due to https://eaglerforge-builder.vercel.app/
 ## todo:
  - [ ] finish features not finished
  - [x] add docs
