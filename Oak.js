@@ -2,7 +2,7 @@
 * OakAPI by stpv22(1). 
 * Docs coming soon!
 */
-const OakAPI = {
+var OakAPI = {
     version: 1.0,
     displayVersion: function () {
         ModAPI.drawStringWithShadow({msg: "OakAPI " + OakAPI.version, x: 1, y: 27, color: -1});
