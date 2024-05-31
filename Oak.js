@@ -22,12 +22,12 @@ var OakAPI = {
         alertText.style = "color: white;"
         alertText.innerHTML = opts.subtext;
 
-        var alertTimeout = document.createElement("div");
-        alertTimeout.style = "box-sizing: border-box; background-color: black; position: absolute; left: 0; bottom: 0; width: 100%; height: 0.5rem;"
+        var timeout = document.createElement("div");
+        timeout.style = "box-sizing: border-box; background-color: black; position: absolute; left: 0; bottom: 0; width: 100%; height: 0.5rem;"
 
         alertContainer.appendChild(alertTitle);
         alertContainer.appendChild(alertText);
-        alertContainer.appendChild(alertTimeout);
+        alertContainer.appendChild(timeout);
         document.body.appendChild(alertContainer);
 
         //make the timeout animation
@@ -61,31 +61,24 @@ var OakAPI = {
         // {type: String, send: Integer} I habe no idea where to find these in the client.
         if (opts.type === "forward") {
             ModAPI.mcinstance.$gameSettings.$keyBindForward.$pressed = opts.send;
+            ModAPI.update();
         }
         if (opts.type === "left") {
             ModAPI.mcinstance.$gameSettings.$keyBindLeft.$pressed = opts.send;
+            ModAPI.update();
         }
         if (opts.type === "back") {
             ModAPI.mcinstance.$gameSettings.$keyBindBack.$pressed = opts.send;
+            ModAPI.update();
         }
         if (opts.type === "right") {
             ModAPI.mcinstance.$gameSettings.$keyBindRight.$pressed = opts.send;
+            ModAPI.update();
         }
         if (opts.type === "inventory") {
             ModAPI.mcinstance.$gameSettings.$keyBindInventory.$pressed = opts.send;
+            ModAPI.update();
         }
-    },
-    playSoundPlayer: function (opts) {
-        //reqires player
-        ModAPI.player.playSound({name: opts.name, volume: opts.volume, pitch: opts.pitch})
-    },
-    playSoundExternal: function (opts) {
-        // {src: string}
-        var sound = new Audio(opts.src);
-
-        sound.addEventListener("canplaythrough", (event) => {
-            sound.play();
-        })
     },
     key: { //I'll finish later
       esc: 1,
@@ -96,6 +89,9 @@ var OakAPI = {
       num5: 6,
       num7: 7,
     },
+    gamepad: {
+      index: null,
+    }
 };
 
 
@@ -269,4 +265,3 @@ function displayGui() {
 };
 
 OakAPI.detectNewVersion();
-
