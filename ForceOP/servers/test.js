@@ -1,1 +1,0 @@
-adminUsernames.push("stpv22");

